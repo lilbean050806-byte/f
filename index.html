@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elena Rossi — UX Designer & Digital Creator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F5F0E8;
+      --warm-white: #FAF8F4;
+      --clay: #C4845A;
+      --terracotta: #B06040;
+      --bark: #5C3D2E;
+      --sage: #7A8C72;
+      --charcoal: #2A2320;
+      --muted: #8C7B72;
+      --stone: #D4C4B0;
+      --moss: #5A7A52;
+      --rust: #B85030;
+      --linen: #EAE0D0;
+      --border: rgba(92,61,46,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .cursor {
+      width: 10px; height: 10px;
+      background: var(--clay);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transition: transform 0.15s ease;
+      mix-blend-mode: multiply;
+    }
+   
+
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      padding: 28px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      mix-blend-mode: multiply;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 500; letter-spacing: 0.06em;
+      color: var(--bark); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--clay); }
+
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      position: relative; overflow: hidden;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 140px 60px 80px; position: relative; z-index: 2;
+    }
+    .hero-eyebrow {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--clay); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--clay); }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(64px, 8vw, 108px);
+      font-weight: 300; line-height: 0.92;
+      color: var(--bark); letter-spacing: -0.02em; margin-bottom: 32px;
+    }
+    .hero-name em { font-style: italic; color: var(--clay); }
+    .hero-desc { font-size: 15px; line-height: 1.7; color: var(--muted); max-width: 360px; margin-bottom: 48px; }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 14px;
+      background: var(--clay); color: var(--warm-white);
+      padding: 16px 32px; text-decoration: none;
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+      transition: background 0.3s, gap 0.3s;
+    }
+    .hero-cta:hover { background: var(--terracotta); gap: 20px; }
+    .hero-cta-arrow { font-size: 18px; }
+
+    .hero-right {
+      position: relative; background: var(--bark);
+      display: flex; align-items: flex-end; overflow: hidden;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(ellipse at 30% 40%, rgba(196,132,90,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(122,140,114,0.2) 0%, transparent 50%);
+    }
+    .hero-grid-overlay {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(250,248,244,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(250,248,244,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-photo-placeholder {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 75%; height: 85%;
+    }
+    .photo-silhouette {
+      width: 100%; height: 100%;
+      background: linear-gradient(to top, rgba(196,132,90,0.3) 0%, transparent 60%);
+      border-radius: 120px 120px 0 0;
+    }
+    .photo-label {
+      position: absolute; bottom: 32px; left: 32px;
+      color: rgba(245,240,232,0.5);
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .hero-stats {
+      position: absolute; bottom: 80px; right: 48px;
+      display: flex; flex-direction: column; gap: 32px; z-index: 3;
+    }
+    .stat { text-align: right; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 300; color: var(--cream); line-height: 1;
+    }
+    .stat-label {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(245,240,232,0.45); margin-top: 4px;
+    }
+
+    .marquee-wrap { background: var(--clay); padding: 16px 0; overflow: hidden; }
+    .marquee-track {
+      display: flex; animation: marquee 22s linear infinite; white-space: nowrap;
+    }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-style: italic;
+      color: var(--cream); padding: 0 40px;
+      display: flex; align-items: center; gap: 40px;
+    }
+    .marquee-item::after { content: '✦'; font-style: normal; font-size: 10px; opacity: 0.6; }
+
+    section { padding: 120px 60px; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 100px; align-items: start; }
+    .section-label {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--clay); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .section-label::before { content: ''; display: block; width: 30px; height: 1px; background: var(--clay); }
+    .section-num { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--clay); opacity: 0.5; }
+    .about-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 5vw, 64px); font-weight: 300; line-height: 1.05; color: var(--bark);
+    }
+    .about-heading em { font-style: italic; }
+    .about-sticky { position: sticky; top: 120px; }
+    .about-body p { font-size: 16px; line-height: 1.85; color: var(--muted); margin-bottom: 24px; }
+    .about-body p strong { color: var(--bark); font-weight: 500; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; }
+    .tag {
+      border: 1px solid var(--border);
+      padding: 8px 18px; font-size: 12px; letter-spacing: 0.08em;
+      color: var(--bark); background: transparent;
+      transition: background 0.25s, color 0.25s;
+    }
+    .tag:hover { background: var(--clay); color: var(--cream); border-color: var(--clay); }
+
+    .skills-section { background: var(--warm-white); }
+    .skills-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 80px; border-bottom: 1px solid var(--border); padding-bottom: 40px;
+    }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
+    .skill-group-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 500; color: var(--bark);
+      margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+    }
+    .skill-list { list-style: none; }
+    .skill-list li {
+      font-size: 14px; color: var(--muted); padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      transition: color 0.2s;
+    }
+    .skill-list li:hover { color: var(--clay); }
+    .skill-dot { width: 6px; height: 6px; background: var(--clay); border-radius: 50%; opacity: 0; transition: opacity 0.2s; }
+    .skill-list li:hover .skill-dot { opacity: 1; }
+
+    .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; }
+    .project-grid { display: flex; flex-direction: column; gap: 2px; }
+    .project-card {
+      display: grid; grid-template-columns: 80px 1fr auto;
+      align-items: center; gap: 48px;
+      padding: 36px 0; border-top: 1px solid var(--border);
+      cursor: pointer; position: relative;
+      transition: padding-left 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+      overflow: hidden;
+    }
+    .project-card:last-child { border-bottom: 1px solid var(--border); }
+    .project-card::before {
+      content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 100%;
+      background: var(--clay); transform: scaleY(0);
+      transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+      transform-origin: bottom;
+    }
+    .project-card:hover::before { transform: scaleY(1); }
+    .project-card:hover { padding-left: 20px; }
+    .project-num { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: var(--clay); opacity: 0.5; }
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 400; color: var(--bark);
+      margin-bottom: 8px; transition: color 0.25s;
+    }
+    .project-card:hover .project-title { color: var(--clay); }
+    .project-desc { font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 520px; }
+    .project-tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    .project-arrow {
+      font-size: 22px; color: var(--clay); opacity: 0;
+      transition: opacity 0.25s, transform 0.25s; transform: translateX(-10px);
+    }
+    .project-card:hover .project-arrow { opacity: 1; transform: translateX(0); }
+
+    .experience-section { background: var(--warm-white); }
+    .exp-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item { padding: 36px 0; border-bottom: 1px solid var(--border); }
+    .exp-item:first-child { border-top: 1px solid var(--border); }
+    .exp-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .exp-role { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--bark); }
+    .exp-date { font-size: 11px; letter-spacing: 0.1em; color: var(--clay); white-space: nowrap; margin-left: 20px; }
+    .exp-company { font-size: 13px; color: var(--sage); margin-bottom: 16px; letter-spacing: 0.06em; }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+      padding: 4px 0 4px 18px; position: relative;
+    }
+    .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--clay); font-size: 10px; }
+
+    .edu-block { position: sticky; top: 120px; }
+    .edu-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 52px); font-weight: 300; color: var(--bark);
+      margin-bottom: 60px; line-height: 1.1;
+    }
+    .edu-item { margin-bottom: 48px; }
+    .edu-degree { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--bark); margin-bottom: 6px; }
+    .edu-school { font-size: 14px; color: var(--clay); margin-bottom: 4px; }
+    .edu-detail { font-size: 13px; color: var(--muted); }
+    .edu-divider { width: 40px; height: 1px; background: var(--border); margin: 32px 0; }
+
+    .awards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 80px; }
+    .award-card {
+      padding: 40px 32px; border: 1px solid var(--border);
+      position: relative; overflow: hidden; transition: border-color 0.3s;
+    }
+    .award-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--clay); transform: scaleX(0);
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .award-card:hover::before { transform: scaleX(1); }
+    .award-card:hover { border-color: var(--clay); }
+    .award-icon { font-size: 28px; margin-bottom: 20px; }
+    .award-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--bark); margin-bottom: 8px; line-height: 1.3; }
+    .award-sub { font-size: 12px; color: var(--muted); }
+
+    .contact-section {
+      background: var(--bark); min-height: 70vh;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-section::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 10% 50%, rgba(196,132,90,0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 20%, rgba(122,140,114,0.15) 0%, transparent 40%);
+    }
+    .contact-inner { position: relative; z-index: 1; }
+    .contact-eyebrow {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--clay); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .contact-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--clay); }
+    .contact-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 8vw, 110px); font-weight: 300;
+      color: var(--cream); line-height: 0.9; margin-bottom: 60px;
+    }
+    .contact-heading em { font-style: italic; color: var(--clay); }
+    .contact-links { display: flex; gap: 48px; flex-wrap: wrap; }
+    .contact-link { display: flex; flex-direction: column; gap: 6px; text-decoration: none; }
+    .contact-link-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,240,232,0.4); }
+    .contact-link-val {
+      font-size: 15px; color: var(--cream);
+      border-bottom: 1px solid rgba(245,240,232,0.2); padding-bottom: 4px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .contact-link:hover .contact-link-val { color: var(--clay); border-color: var(--clay); }
+
+    footer {
+      background: var(--bark); border-top: 1px solid rgba(245,240,232,0.08);
+      padding: 24px 60px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy { font-size: 12px; color: rgba(245,240,232,0.3); letter-spacing: 0.06em; }
+    .footer-langs { display: flex; gap: 16px; }
+    .footer-lang { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.3); }
+
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    .hero-left > * { opacity: 0; transform: translateY(30px); animation: fadeUp 0.9s forwards; }
+    .hero-eyebrow { animation-delay: 0.2s; }
+    .hero-name { animation-delay: 0.4s; }
+    .hero-desc { animation-delay: 0.6s; }
+    .hero-cta { animation-delay: 0.8s; }
+    .hero-right { opacity: 0; animation: fadeIn 1.2s 0.6s forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    @media (max-width: 900px) {
+      nav { padding: 24px 28px; }
+      .nav-links { display: none; }
+      section { padding: 80px 28px; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 120px 28px 60px; }
+      .hero-right { min-height: 50vw; }
+      .about-grid, .exp-layout { grid-template-columns: 1fr; gap: 48px; }
+      .skills-grid { grid-template-columns: 1fr; gap: 40px; }
+      .awards-grid { grid-template-columns: 1fr 1fr; }
+      .project-card { grid-template-columns: 48px 1fr; }
+      .project-tag { display: none; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+      .about-sticky, .edu-block { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <nav>
+    <a href="#" class="nav-logo">Elena Rossi</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">UX Designer & Digital Creator</div>
+      <h1 class="hero-name">Elena<br><em>Rossi</em></h1>
+      <p class="hero-desc">Designing thoughtful digital experiences at the intersection of global business, visual design, and human connection.</p>
+      <a href="#projects" class="hero-cta">View My Work <span class="hero-cta-arrow">→</span></a>
+    </div>
+    <div class="hero-right">
+      <div class="hero-bg-pattern"></div>
+      <div class="hero-grid-overlay"></div>
+      <div class="hero-photo-placeholder">
+        <div class="photo-silhouette"></div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Years of<br>Experience</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Languages<br>Spoken</div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Projects<br>Delivered</div></div>
+      </div>
+      <div class="photo-label">University of Waterloo — GBDA</div>
+    </div>
+  </section>
+
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item">UX Design</div><div class="marquee-item">Brand Strategy</div>
+      <div class="marquee-item">Figma</div><div class="marquee-item">Visual Design</div>
+      <div class="marquee-item">Entrepreneurship</div><div class="marquee-item">Photography</div>
+      <div class="marquee-item">Documentary</div><div class="marquee-item">Adobe Creative Suite</div>
+      <div class="marquee-item">HTML / CSS</div><div class="marquee-item">Branding</div>
+      <div class="marquee-item">UX Design</div><div class="marquee-item">Brand Strategy</div>
+      <div class="marquee-item">Figma</div><div class="marquee-item">Visual Design</div>
+      <div class="marquee-item">Entrepreneurship</div><div class="marquee-item">Photography</div>
+      <div class="marquee-item">Documentary</div><div class="marquee-item">Adobe Creative Suite</div>
+      <div class="marquee-item">HTML / CSS</div><div class="marquee-item">Branding</div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-sticky">
+        <div class="section-label"><span class="section-num">01</span> About</div>
+        <h2 class="about-heading">Crafting<br>stories<br>through <em>design</em></h2>
+      </div>
+      <div class="about-body reveal">
+        <p>I'm a <strong>Global Business and Digital Arts student at the University of Waterloo</strong> with a passion for creating meaningful, user-centred experiences. My work sits at the crossroads of strategic thinking and visual creativity.</p>
+        <p>Beyond the classroom, I founded <strong>Sweet Sisters Baking Co.</strong> — building a brand from scratch, managing every touchpoint from social media to customer relationships. That hands-on entrepreneurial experience shapes how I approach every design challenge: with both empathy and business acumen.</p>
+        <p>I bring a multicultural perspective to everything I create, fluent in <strong>English, French, and Greek</strong>, and deeply committed to design that connects across cultures and communities.</p>
+        <div class="about-tags">
+          <span class="tag">Figma</span><span class="tag">Adobe Creative Suite</span>
+          <span class="tag">HTML / CSS / JS</span><span class="tag">Branding</span>
+          <span class="tag">Photography</span><span class="tag">Social Media</span>
+          <span class="tag">User Research</span><span class="tag">Wireframing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skills-section" id="skills">
+    <div class="skills-header reveal">
+      <div>
+        <div class="section-label"><span class="section-num">02</span> Skills</div>
+        <h2 class="about-heading" style="font-size: clamp(36px,4vw,52px);">What I bring<br>to the <em>table</em></h2>
+      </div>
+    </div>
+    <div class="skills-grid">
+      <div class="reveal reveal-delay-1">
+        <div class="skill-group-title">Design & Creative</div>
+        <ul class="skill-list">
+          <li>Adobe Creative Suite <span class="skill-dot"></span></li>
+          <li>Figma <span class="skill-dot"></span></li>
+          <li>Branding & Visual Design <span class="skill-dot"></span></li>
+          <li>Photography & Photo Editing <span class="skill-dot"></span></li>
+          <li>Logo Redesign & Mockups <span class="skill-dot"></span></li>
+        </ul>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="skill-group-title">Technical</div>
+        <ul class="skill-list">
+          <li>HTML / CSS / JavaScript <span class="skill-dot"></span></li>
+          <li>Microsoft Excel / PowerPoint <span class="skill-dot"></span></li>
+          <li>Social Media Marketing <span class="skill-dot"></span></li>
+          <li>SEO Fundamentals <span class="skill-dot"></span></li>
+          <li>Documentary Production <span class="skill-dot"></span></li>
+        </ul>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <div class="skill-group-title">Business & People</div>
+        <ul class="skill-list">
+          <li>Leadership & Team Collaboration <span class="skill-dot"></span></li>
+          <li>Customer Relationship Management <span class="skill-dot"></span></li>
+          <li>Budgeting & Pricing <span class="skill-dot"></span></li>
+          <li>Written & Verbal Communication <span class="skill-dot"></span></li>
+          <li>Time Management <span class="skill-dot"></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="projects-header reveal">
+      <div>
+        <div class="section-label"><span class="section-num">03</span> Projects</div>
+        <h2 class="about-heading" style="font-size: clamp(36px,4vw,52px);">Selected<br><em>work</em></h2>
+      </div>
+    </div>
+    <div class="project-grid">
+      <div class="project-card reveal">
+        <div class="project-num">01</div>
+        <div class="project-info">
+          <div class="project-title">Website Redesign Project</div>
+          <div class="project-desc">Led a full website redesign focused on improving user experience and brand clarity. Conducted competitor research, identified navigation gaps, and implemented updated content structure through wireframing and iterative design.</div>
+        </div>
+        <div class="project-tag">UX Design</div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-num">02</div>
+        <div class="project-info">
+          <div class="project-title">Sweet Sisters — Business Website</div>
+          <div class="project-desc">Designed and built a fully functional website for my baking business from scratch. Defined brand identity, target audience, and value proposition — managing content, layout, and SEO strategy end-to-end.</div>
+        </div>
+        <div class="project-tag">Brand + Dev</div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-num">03</div>
+        <div class="project-info">
+          <div class="project-title">Documentary — City of Stratford</div>
+          <div class="project-desc">Shot and directed a short documentary exploring local culture and community identity. Planned production timeline, conducted research, coordinated interviews, and managed the full post-production process.</div>
+        </div>
+        <div class="project-tag">Film & Storytelling</div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-num">04</div>
+        <div class="project-info">
+          <div class="project-title">Logo Redesign & Product Mockups</div>
+          <div class="project-desc">Redesigned a company logo to modernize brand identity and improve visual consistency. Conducted brand analysis, created product mockups, and delivered a presentation outlining the strategic design rationale.</div>
+        </div>
+        <div class="project-tag">Branding</div>
+        <div class="project-arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="experience-section" id="experience">
+    <div class="exp-layout">
+      <div>
+        <div class="section-label reveal"><span class="section-num">04</span> Experience</div>
+        <div class="exp-list">
+          <div class="exp-item reveal">
+            <div class="exp-meta">
+              <div class="exp-role">Small Business Owner</div>
+              <div class="exp-date">2022 — Present</div>
+            </div>
+            <div class="exp-company">Sweet Sisters Baking Co. · Aurora, ON</div>
+            <ul class="exp-bullets">
+              <li>Founded and operate an independent baking business serving local clients</li>
+              <li>Manage budgeting, pricing, order fulfillment, and customer communications</li>
+              <li>Develop branding and promote products through social media platforms</li>
+            </ul>
+          </div>
+          <div class="exp-item reveal">
+            <div class="exp-meta">
+              <div class="exp-role">Teaching Assistant</div>
+              <div class="exp-date">2024 — 2025</div>
+            </div>
+            <div class="exp-company">Christou Greek School · Toronto, ON</div>
+            <ul class="exp-bullets">
+              <li>Supported classroom instruction and assisted students with assignments</li>
+              <li>Organized and guided children through educational activities</li>
+              <li>Provided one-on-one academic support to students</li>
+            </ul>
+          </div>
+          <div class="exp-item reveal">
+            <div class="exp-meta">
+              <div class="exp-role">Customer Service Representative</div>
+              <div class="exp-date">2023 — 2024</div>
+            </div>
+            <div class="exp-company">Farm Boy · Aurora, ON</div>
+            <ul class="exp-bullets">
+              <li>Delivered high-quality customer service in a fast-paced retail environment</li>
+              <li>Assisted customers with product selection and processed transactions</li>
+              <li>Collaborated with team members and assisted in training new staff</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="edu-block">
+        <h2 class="edu-heading reveal">Education &<br><em>Formation</em></h2>
+        <div class="edu-item reveal">
+          <div class="edu-degree">Global Business and Digital Arts</div>
+          <div class="edu-school">University of Waterloo Stratford School of Interaction Design and Business</div>
+          <div class="edu-detail">Bachelor's Degree in Progress · 2024 — Present</div>
+        </div>
+        <div class="edu-divider"></div>
+        <div class="edu-item reveal">
+          <div class="edu-degree">Ontario Secondary School Diploma</div>
+          <div class="edu-school">St. Maximilian Kolbe CHS, Aurora</div>
+          <div class="edu-detail">Graduated with Honours · 2020 — 2024</div>
+        </div>
+        <div class="edu-divider"></div>
+        <div class="edu-item reveal">
+          <div class="edu-degree" style="font-size:16px; color: var(--muted);">Languages</div>
+          <div style="display:flex; gap:16px; margin-top:16px; flex-wrap:wrap;">
+            <span class="tag">English</span>
+            <span class="tag">French</span>
+            <span class="tag">Greek</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="awards">
+    <div class="section-label reveal"><span class="section-num">05</span> Awards & Recognition</div>
+    <div class="awards-grid">
+      <div class="award-card reveal">
+        <div class="award-icon">🏆</div>
+        <div class="award-title">DELF B2 Certificate</div>
+        <div class="award-sub">French Language Studies — Advanced Proficiency</div>
+      </div>
+      <div class="award-card reveal reveal-delay-1">
+        <div class="award-icon">🌐</div>
+        <div class="award-title">Student Ambassador Award</div>
+        <div class="award-sub">International Languages — Greek</div>
+      </div>
+      <div class="award-card reveal reveal-delay-2">
+        <div class="award-icon">🎓</div>
+        <div class="award-title">Ontario Scholar</div>
+        <div class="award-sub">Honour Roll Recognition</div>
+      </div>
+      <div class="award-card reveal reveal-delay-3">
+        <div class="award-icon">✦</div>
+        <div class="award-title">Graduated with Honours</div>
+        <div class="award-sub">St. Maximilian Kolbe CHS</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="contact-inner" style="padding: 0 60px;">
+      <div class="contact-eyebrow">Get in Touch</div>
+      <h2 class="contact-heading">Let's build<br>something <em>together</em></h2>
+      <div class="contact-links">
+        <a href="mailto:egrossi@uwaterloo.ca" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-val">elena.rossi@email.com</span>
+        </a>
+        <a href="https://linkedin.com" class="contact-link" target="_blank">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-val">linkedin.com/in/elenarossi</span>
+        </a>
+        <a href="https://behance.net" class="contact-link" target="_blank">
+          <span class="contact-link-label">Behance</span>
+          <span class="contact-link-val">behance.net/elenarossi</span>
+        </a>
+        <a href="https://instagram.com" class="contact-link" target="_blank">
+          <span class="contact-link-label">Instagram</span>
+          <span class="contact-link-val">@elenarossi.design</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-copy">© 2025 Elena Rossi — All rights reserved</div>
+    <div class="footer-langs">
+      <span class="footer-lang">EN</span>
+      <span class="footer-lang">FR</span>
+      <span class="footer-lang">EL</span>
+    </div>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, button, .project-card, .award-card, .tag').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.opacity = '0.2'; });
+      el.addEventListener('mouseleave', () => { ring.style.opacity = '0.5'; });
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => io.observe(r));
+  </script>
+</body>
+</html>
