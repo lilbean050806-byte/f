@@ -22,6 +22,7 @@
       --rust: #B85030;
       --linen: #EAE0D0;
       --border: rgba(92,61,46,0.12);
+      --White: rgba(255, 255, 500); 
     }
 
     html { scroll-behavior: smooth; }
@@ -115,10 +116,24 @@
         linear-gradient(90deg, rgba(250,248,244,0.05) 1px, transparent 1px);
       background-size: 60px 60px;
     }
-    .hero-photo-placeholder {
-      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 75%; height: 85%;
-    }
+   .hero-photo-placeholder {
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 85%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 120px 120px 0 0; /* curved top edges */
+}
     .photo-silhouette {
       width: 100%; height: 100%;
       background: linear-gradient(to top, rgba(196,132,90,0.3) 0%, transparent 60%);
@@ -136,11 +151,11 @@
     .stat { text-align: right; }
     .stat-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 42px; font-weight: 300; color: var(--cream); line-height: 1;
+      font-size: 42px; font-weight: 300; color: var(--White); line-height: 1;
     }
     .stat-label {
       font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-      color: rgba(245,240,232,0.45); margin-top: 4px;
+      color: var(--White); margin-top: 4px;
     }
 
     .marquee-wrap { background: var(--clay); padding: 16px 0; overflow: hidden; }
@@ -376,26 +391,44 @@
   </nav>
 
   <section class="hero" id="hero">
-    <div class="hero-left">
-      <div class="hero-eyebrow">UX Designer & Digital Creator</div>
-      <h1 class="hero-name">Elena<br><em>Rossi</em></h1>
-      <p class="hero-desc">Designing thoughtful digital experiences at the intersection of global business, visual design, and human connection.</p>
-      <a href="#projects" class="hero-cta">View My Work <span class="hero-cta-arrow">→</span></a>
+  <div class="hero-left">
+    <div class="hero-eyebrow">UX Designer & Digital Creator</div>
+    <h1 class="hero-name">Elena<br><em>Rossi</em></h1>
+    <p class="hero-desc">
+      Designing thoughtful digital experiences at the intersection of global business, visual design, and human connection.
+    </p>
+    <a href="#projects" class="hero-cta">View My Work <span class="hero-cta-arrow">→</span></a>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-grid-overlay"></div>
+
+    <!-- Hero Image -->
+    <div class="hero-photo-placeholder">
+      <img src="IMG_8491.jpeg" alt="Elena Rossi Hero Photo" class="photo-silhouette">
     </div>
-    <div class="hero-right">
-      <div class="hero-bg-pattern"></div>
-      <div class="hero-grid-overlay"></div>
-      <div class="hero-photo-placeholder">
-        <div class="photo-silhouette"></div>
+
+    <!-- Stats -->
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years of<br>Experience</div>
       </div>
-      <div class="hero-stats">
-        <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Years of<br>Experience</div></div>
-        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Languages<br>Spoken</div></div>
-        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Projects<br>Delivered</div></div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Languages<br>Spoken</div>
       </div>
-      <div class="photo-label">University of Waterloo — GBDA</div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Projects<br>Delivered</div>
+      </div>
     </div>
-  </section>
+
+    <!-- Photo label -->
+    <div class="photo-label">University of Waterloo — GBDA</div>
+  </div>
+</section>
 
   <div class="marquee-wrap">
     <div class="marquee-track">
