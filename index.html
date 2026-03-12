@@ -344,6 +344,41 @@
       opacity: 0; transform: translateY(40px);
       transition: opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
     }
+    /* Project dropdown content */
+
+.project-details{
+  grid-column: 2 / -1;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.project-card.open .project-details{
+  max-height: 400px;
+  margin-top: 20px;
+}
+
+.project-details p{
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.project-details img{
+  width: 100%;
+  max-width: 500px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.project-details a{
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--clay);
+  text-decoration: none;
+}
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
@@ -513,44 +548,115 @@
         <h2 class="about-heading" style="font-size: clamp(36px,4vw,52px);">Selected<br><em>work</em></h2>
       </div>
     </div>
-    <div class="project-grid">
-      <div class="project-card reveal">
-        <div class="project-num">01</div>
-        <div class="project-info">
-          <div class="project-title">Website Redesign Project</div>
-          <div class="project-desc">Led a full website redesign focused on improving user experience and brand clarity. Conducted competitor research, identified navigation gaps, and implemented updated content structure through wireframing and iterative design.</div>
-        </div>
-        <div class="project-tag">UX Design</div>
-        <div class="project-arrow">→</div>
-      </div>
-      <div class="project-card reveal reveal-delay-1">
-        <div class="project-num">02</div>
-        <div class="project-info">
-          <div class="project-title">Sweet Sisters — Business Website</div>
-          <div class="project-desc">Designed and built a fully functional website for my baking business from scratch. Defined brand identity, target audience, and value proposition — managing content, layout, and SEO strategy end-to-end.</div>
+    <div class="project-card reveal">
+  <div class="project-num">01</div>
+
+  <div class="project-info">
+    <div class="project-title">Website Redesign Project</div>
+    <div class="project-desc">
+      Led a full website redesign focused on improving user experience and brand clarity.
+    </div>
+  </div>
+
+  <div class="project-tag">UX Design</div>
+  <div class="project-arrow">→</div>
+
+  <!-- DROPDOWN CONTENT -->
+  <div class="project-details">
+    <p>
+      For this project I conducted competitor research, created wireframes,
+      redesigned the navigation structure, and tested layouts to improve
+      usability and engagement.
+    </p>
+
+    <img src="ef.png" alt="Website redesign project">
+
+    <a href="file:///Users/elena/Downloads/MOCKUPS.pdf">View Full Case Study →</a>
+  </div>
+</div>
+    <div class="project-card reveal reveal-delay-1">
+  <div class="project-num">02</div>
+
+  <div class="project-info">
+    <div class="project-title">Sweet Sisters — Business Website</div>
+    <div class="project-desc">
+      Designed and built a fully functional website for my baking business from scratch.
+    </div>
+  </div>
+
+  <div class="project-tag">Brand + Dev</div>
+  <div class="project-arrow">→</div>
+
+  <div class="project-details">
+    <p>
+      This project involved developing the full digital presence for my baking business.
+      I created the brand identity, designed the website layout, and built the site
+      using HTML and CSS while implementing SEO strategies to improve visibility.
+    </p>
+
+    <img src="Screenshot 2026-03-11 at 9.45.31 AM.png" alt="Sweet Sisters Website">
+
+    <a href="https://lilbean050806-byte.github.io/menu.html/">View Full Project →</a>
+  </div>
+</div>
         </div>
         <div class="project-tag">Brand + Dev</div>
         <div class="project-arrow">→</div>
       </div>
-      <div class="project-card reveal reveal-delay-2">
-        <div class="project-num">03</div>
-        <div class="project-info">
-          <div class="project-title">Documentary — City of Stratford</div>
-          <div class="project-desc">Shot and directed a short documentary exploring local culture and community identity. Planned production timeline, conducted research, coordinated interviews, and managed the full post-production process.</div>
-        </div>
+     <div class="project-card reveal reveal-delay-2">
+  <div class="project-num">03</div>
+
+  <div class="project-info">
+    <div class="project-title">Documentary — City of Stratford</div>
+    <div class="project-desc">
+      Shot and directed a short documentary exploring local culture and community identity.
+    </div>
+  </div>
+
+  <div class="project-tag">Film & Storytelling</div>
+  <div class="project-arrow">→</div>
+
+  <div class="project-details">
+    <p>
+      I directed and produced a documentary focused on the community of Stratford.
+      The project included research, storyboarding, conducting interviews, filming,
+      and managing the entire post-production editing process.
+    </p>
+
+    <img src="IMG_1356.jpg" alt="Stratford Documentary">
+
+    <a href="#">Watch Documentary →</a>
+  </div>
+</div>
         <div class="project-tag">Film & Storytelling</div>
         <div class="project-arrow">→</div>
       </div>
-      <div class="project-card reveal reveal-delay-3">
-        <div class="project-num">04</div>
-        <div class="project-info">
-          <div class="project-title">Logo Redesign & Product Mockups</div>
-          <div class="project-desc">Redesigned a company logo to modernize brand identity and improve visual consistency. Conducted brand analysis, created product mockups, and delivered a presentation outlining the strategic design rationale.</div>
-        </div>
-        <div class="project-tag">Branding</div>
-        <div class="project-arrow">→</div>
-      </div>
+     <div class="project-card reveal reveal-delay-3">
+  <div class="project-num">04</div>
+
+  <div class="project-info">
+    <div class="project-title">Logo Redesign & Product Mockups</div>
+    <div class="project-desc">
+      Redesigned a company logo to modernize brand identity and improve visual consistency.
     </div>
+  </div>
+
+  <div class="project-tag">Branding</div>
+  <div class="project-arrow">→</div>
+
+  <div class="project-details">
+    <p>
+      This branding project focused on modernizing a company's visual identity.
+      I conducted brand analysis, redesigned the logo, and created product mockups
+      to demonstrate how the new identity would appear across different materials.
+    </p>
+
+    <img src="
+Firefly_Gemini Flash_change the background colour do it doesnt blend so much with the product 503956.png" alt="Logo redesign project">
+
+    <a href="https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:b0e38a7e-1af0-48dc-b3bf-825a67f080f2?invite=true&accept=true%3Fpreload%3Dsharesheet&promoid=Z2G1FQKR&mv=other">View Design Process →</a>
+  </div>
+</div>
   </section>
 
   <section class="experience-section" id="experience">
@@ -710,6 +816,12 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.12 });
     reveals.forEach(r => io.observe(r));
+    
+    document.querySelectorAll(".project-card").forEach(card => {
+  card.addEventListener("click", () => {
+    card.classList.toggle("open");
+  });
+});
   </script>
 </body>
 </html>
