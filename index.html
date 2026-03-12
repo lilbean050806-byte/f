@@ -223,13 +223,17 @@
     .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; }
     .project-grid { display: flex; flex-direction: column; gap: 2px; }
     .project-card {
-      display: grid; grid-template-columns: 80px 1fr auto;
-      align-items: center; gap: 48px;
-      padding: 36px 0; border-top: 1px solid var(--border);
-      cursor: pointer; position: relative;
-      transition: padding-left 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
-      overflow: hidden;
-    }
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  gap: 48px;
+  padding: 36px 0;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+  position: relative;
+  transition: padding-left 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+  overflow: visible;   /* FIXED */
+}
     .project-card:last-child { border-bottom: 1px solid var(--border); }
     .project-card::before {
       content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 100%;
@@ -351,10 +355,11 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s ease;
+  padding-bottom: 20px;
 }
 
 .project-card.open .project-details{
-  max-height: 400px;
+  max-height: 800px;
   margin-top: 20px;
 }
 
@@ -362,14 +367,14 @@
   font-size: 14px;
   color: var(--muted);
   line-height: 1.6;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .project-details img{
   width: 100%;
   max-width: 500px;
   border-radius: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .project-details a{
@@ -541,14 +546,21 @@
     </div>
   </section>
 
-  <section id="projects">
-    <div class="projects-header reveal">
-      <div>
-        <div class="section-label"><span class="section-num">03</span> Projects</div>
-        <h2 class="about-heading" style="font-size: clamp(36px,4vw,52px);">Selected<br><em>work</em></h2>
-      </div>
-    </div>
-    <div class="project-card reveal">
+ <section id="projects">
+
+<div class="projects-header reveal">
+  <div>
+    <div class="section-label"><span class="section-num">03</span> Projects</div>
+    <h2 class="about-heading" style="font-size: clamp(36px,4vw,52px);">
+      Selected<br><em>work</em>
+    </h2>
+  </div>
+</div>
+
+<div class="project-grid">
+
+<!-- Project 1 -->
+<div class="project-card reveal">
   <div class="project-num">01</div>
 
   <div class="project-info">
@@ -561,12 +573,11 @@
   <div class="project-tag">UX Design</div>
   <div class="project-arrow">→</div>
 
-  <!-- DROPDOWN CONTENT -->
   <div class="project-details">
     <p>
-      For this project I conducted competitor research, created wireframes,
-      redesigned the navigation structure, and tested layouts to improve
-      usability and engagement.
+      Conducted competitor research, created wireframes,
+      redesigned navigation structure, and tested layouts
+      to improve usability and engagement.
     </p>
 
     <img src="ef.png" alt="Website redesign project">
@@ -574,13 +585,15 @@
     <a href="file:///Users/elena/Downloads/MOCKUPS.pdf">View Full Case Study →</a>
   </div>
 </div>
-    <div class="project-card reveal reveal-delay-1">
+
+<!-- Project 2 -->
+<div class="project-card reveal reveal-delay-1">
   <div class="project-num">02</div>
 
   <div class="project-info">
     <div class="project-title">Sweet Sisters — Business Website</div>
     <div class="project-desc">
-      Designed and built a fully functional website for my baking business from scratch.
+      Designed and built a fully functional website for my baking business.
     </div>
   </div>
 
@@ -589,27 +602,24 @@
 
   <div class="project-details">
     <p>
-      This project involved developing the full digital presence for my baking business.
-      I created the brand identity, designed the website layout, and built the site
-      using HTML and CSS while implementing SEO strategies to improve visibility.
+      Built the full digital presence for my baking business including
+      branding, layout design, and HTML/CSS development.
     </p>
 
-    <img src="Screenshot 2026-03-11 at 9.45.31 AM.png" alt="Sweet Sisters Website">
+    <img src="Screenshot 2026-03-11 at 9.45.31 AM.png">
 
     <a href="https://lilbean050806-byte.github.io/menu.html/">View Full Project →</a>
   </div>
 </div>
-        </div>
-        <div class="project-tag">Brand + Dev</div>
-        <div class="project-arrow">→</div>
-      </div>
-     <div class="project-card reveal reveal-delay-2">
+
+<!-- Project 3 -->
+<div class="project-card reveal reveal-delay-2">
   <div class="project-num">03</div>
 
   <div class="project-info">
     <div class="project-title">Documentary — City of Stratford</div>
     <div class="project-desc">
-      Shot and directed a short documentary exploring local culture and community identity.
+      Shot and directed a short documentary exploring local culture.
     </div>
   </div>
 
@@ -618,26 +628,24 @@
 
   <div class="project-details">
     <p>
-      I directed and produced a documentary focused on the community of Stratford.
-      The project included research, storyboarding, conducting interviews, filming,
-      and managing the entire post-production editing process.
+      Directed and produced a documentary about Stratford's community,
+      including research, filming, interviews, and editing.
     </p>
 
-    <img src="IMG_1356.jpg" alt="Stratford Documentary">
+    <img src="IMG_1356.jpg">
 
     <a href="#">Watch Documentary →</a>
   </div>
 </div>
-        <div class="project-tag">Film & Storytelling</div>
-        <div class="project-arrow">→</div>
-      </div>
-     <div class="project-card reveal reveal-delay-3">
+
+<!-- Project 4 -->
+<div class="project-card reveal reveal-delay-3">
   <div class="project-num">04</div>
 
   <div class="project-info">
     <div class="project-title">Logo Redesign & Product Mockups</div>
     <div class="project-desc">
-      Redesigned a company logo to modernize brand identity and improve visual consistency.
+      Redesigned a company logo and built visual product mockups.
     </div>
   </div>
 
@@ -646,18 +654,18 @@
 
   <div class="project-details">
     <p>
-      This branding project focused on modernizing a company's visual identity.
-      I conducted brand analysis, redesigned the logo, and created product mockups
-      to demonstrate how the new identity would appear across different materials.
+      Conducted brand analysis, redesigned the logo, and created
+      product mockups to show the new identity across materials.
     </p>
 
-    <img src="
-Firefly_Gemini Flash_change the background colour do it doesnt blend so much with the product 503956.png" alt="Logo redesign project">
+    <img src="Firefly_Gemini Flash_change the background colour do it doesnt blend so much with the product 503956.png">
 
-    <a href="https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:b0e38a7e-1af0-48dc-b3bf-825a67f080f2?invite=true&accept=true%3Fpreload%3Dsharesheet&promoid=Z2G1FQKR&mv=other">View Design Process →</a>
+    <a href="https://new.express.adobe.com/">View Design Process →</a>
   </div>
 </div>
-  </section>
+
+</div>
+</section>
 
   <section class="experience-section" id="experience">
     <div class="exp-layout">
